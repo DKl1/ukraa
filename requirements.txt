@@ -1,0 +1,5 @@
+numpy
+faiss-cpu
+laserembeddings
+hydra-core
+setuptools

@@ -1,0 +1,11 @@
+# config files
+.idea
+
+# personal files:
+aligned_output.txt
+DEMO.py
+
+# envs
+
+# other
+ukraa.egg-info
