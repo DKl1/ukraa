@@ -3,3 +3,9 @@ faiss-cpu
 laserembeddings
 hydra-core
 setuptools
+tqdm
+PyYAML
+sentence-transformers
+transformers
+torch
+pandas

@@ -9,10 +9,10 @@ It supports [ ] language pair via parameters --src_lang and --tgt_lang.
 import argparse
 import numpy as np
 from auto_align.data import load_text
-from auto_align.embeddings import LaserEncoder
 from auto_align.aligner import FAISSAligner
 from auto_align.evaluation import compute_metrics
 from auto_align.utils import setup_logger
+from auto_align.encoders.encoder_factory import get_encoder
 
 
 def main() -> None:
@@ -39,10 +39,12 @@ def main() -> None:
     src_sentences = load_text(args.src_file, fmt=args.format)
     tgt_sentences = load_text(args.tgt_file, fmt=args.format)
 
-    encoder = LaserEncoder()
+    encoder = get_encoder(args.src_lang, args.tgt_lang)
     logger.info("Embedding sentences...")
     src_embeddings = encoder.embed_sentences(src_sentences, lang=args.src_lang)
     tgt_embeddings = encoder.embed_sentences(tgt_sentences, lang=args.tgt_lang)
+
+    logger.info("Embedded...")
 
     dimension = src_embeddings.shape[1]
     aligner = FAISSAligner(dimension)
