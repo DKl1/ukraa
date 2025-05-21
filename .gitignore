@@ -62,6 +62,7 @@ data
 DEMO.py
 ukraa.egg-info/
 data/temp/
+data_en_es/
 .vector_cache/
 
 # Model files and large data (if needed)
