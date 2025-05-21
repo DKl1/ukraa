@@ -1,11 +1,78 @@
-# config files
-.idea
+# Python standard ignores
+__pycache__/
+**/__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# personal files:
+# Distribution / packaging
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+ukraa_env/
+ukraa_conda/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Project specific files
 aligned_output.txt
+aligned_en_uk.txt
+flores200_results.txt
+data
 DEMO.py
+ukraa.egg-info/
+data/temp/
+.vector_cache/
 
-# envs
+# Model files and large data (if needed)
+*.bin
+*.pt
+*.pth
+**/models/cached_*
 
-# other
-ukraa.egg-info
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs
+logs/
+*.log
