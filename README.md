@@ -68,28 +68,58 @@ The library provides a command-line interface (CLI) through the auto-align entry
 To align sentences between a source file and a target file (with an optional gold standard file for evaluation), run:
 
 ```bash
-auto-align --src_file data/uk.txt --tgt_file data/en.txt --gold_file data/gold.txt --src_lang uk --tgt_lang en --k 5
+auto-align --src-file data/uk.txt --tgt-file data/en.txt --gold data/gold.txt --src-lang uk --tgt-lang en --topk 5
 ```
 
-- --src_file: Path to the source text file.
-- --tgt_file: Path to the target text file.
-- --gold_file: (Optional) Path to the gold standard indices file.
-- --src_lang: Source language code (default is "uk" for Ukrainian).
-- --tgt_lang: Target language code (default is "en" for English).
-- --k: Number of nearest neighbors (default is 5).
+##### CLI Parameters
+
+- **Required Parameters:**
+  - `--src-file` / `-s`: Path to the source text file
+  - `--tgt-file` / `-t`: Path to the target text file
+
+- **Language Settings:**
+  - `--src-lang` / `-sl`: Source language code (e.g., "uk" for Ukrainian)
+  - `--tgt-lang` / `-tl`: Target language code (e.g., "en" for English)
+
+- **Alignment Controls:**
+  - `--threshold` / `-th`: Cosine similarity threshold (0 to 1). Default: 0.7
+  - `--topk` / `-k`: Number of nearest neighbors to consider for each source sentence. Default: 5
+  - `--batch-size` / `-b`: Batch size for processing embeddings. Default: 512
+
+- **Model Selection:**
+  - `--encoder` / `-e`: Which encoder to use. Options: "labse", "laser", "laser2", "sbert"
+
+- **Output and Evaluation:**
+  - `--output` / `-o`: Output file path for aligned pairs. Default: 'aligned_output.txt'
+  - `--gold` / `-g`: Path to gold alignment file (for evaluation)
+  - `--verbose` / `-v`: Enable verbose logging (debug mode)
+
+##### Example Commands
+
+**High precision alignment:**
+```bash
+auto-align --src-file data/uk.txt --tgt-file data/en.txt --threshold 0.85 --topk 3
+```
+
+**High recall alignment:**
+```bash
+auto-align --src-file data/uk.txt --tgt-file data/en.txt --threshold 0.6 --topk 10
+```
+
+**Using a specific encoder:**
+```bash
+auto-align --src-file data/uk.txt --tgt-file data/en.txt --encoder labse
+```
+
+**With evaluation against gold standard:**
+```bash
+auto-align --src-file data/uk.txt --tgt-file data/en.txt --gold data/gold.txt
+```
 
 ##### Output
 - **Aligned Output:**
-  The aligned pairs, along with FAISS distances, are saved to aligned_output.txt.
+  The aligned pairs, along with cosine similarity scores, are saved to aligned_output.txt (or the path specified by --output).
 - **Evaluation Metrics:**
-If a gold standard file is provided, evaluation metrics (e.g., precision@1, precision@k, MRR) are computed and printed to the console.
+If a gold standard file is provided, evaluation metrics (precision, recall, F1, TER, BLEU, CHRF, BERT-Score) are computed and appended to the output file.
 
 ---
-## Contributing
-
-Contributions are welcome! If you’d like to contribute:
-1. Fork the repository. 
-2. Create a feature branch.
-3. Submit a pull request.
-
-Please follow PEP8 guidelines and ensure your code includes comprehensive docstrings and type hints.

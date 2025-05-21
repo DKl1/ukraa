@@ -1,11 +1,22 @@
-numpy
-faiss-cpu
-laserembeddings
-hydra-core
-setuptools
-tqdm
-PyYAML
-sentence-transformers
-transformers
-torch
-pandas
+# Core dependencies
+numpy>=1.20.0
+torch>=1.10.0
+faiss-cpu>=1.7.0
+laserembeddings>=1.1.0
+sentence-transformers>=2.2.0
+hydra-core>=1.2.0
+setuptools>=61.0.0
+
+# NLP Tools
+nltk>=3.7.0
+transformers>=4.15.0
+sacremoses>=0.0.53
+
+# Evaluation metrics
+bert-score>=0.3.12
+sacrebleu>=2.1.0
+
+# Optional dependencies
+matplotlib>=3.5.0  # For visualization
+networkx>=2.7.0    # For visualization
+scipy>=1.8.0       # For advanced calculations
