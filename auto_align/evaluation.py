@@ -1,55 +1,105 @@
-"""
-Module for evaluation metrics.
+import logging
+from typing import List, Tuple, Set, Dict
 
-This module provides a function to compute metrics for text alignment
-such as precision@1, precision@k, and mean reciprocal rank (MRR).
-"""
+import sacrebleu
+from bert_score import score as bert_score
+from nltk.tokenize import word_tokenize
 
-
-import numpy as np
-from typing import Dict, List
+logger = logging.getLogger(__name__)
 
 
-def compute_metrics(pred_indices: np.ndarray, gold: np.ndarray, metrics: List[str] = None, k: int = 1) -> Dict[
-    str, float]:
-    """
-    Compute evaluation metrics based on predicted indices and gold standard indices.
+def load_gold_alignment(gold_file_path: str) -> Set[Tuple[str, str]]:
 
-    Args:
-        pred_indices (np.ndarray): 2D array of predicted English indices for each Spanish sentence.
-        gold (np.ndarray): 1D array of gold standard indices.
-        metrics (List[str], optional): List of metrics to compute. Defaults to ["precision@1", "precision@k", "mrr"].
-        k (int, optional): Number of top predictions to consider for precision@k. Defaults to 1.
+    gold_pairs = set()
+    with open(gold_file_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            if '\t' in line:
+                src, tgt = line.split('\t', 1)
+            elif '|||' in line:
+                src, tgt = line.split('|||', 1)
+                src = src.strip()
+                tgt = tgt.strip()
+            else:
+                logger.warning(f"Gold alignment line not recognized format: {line}")
+                continue
+            gold_pairs.add((src, tgt))
+    logger.info(f"Loaded {len(gold_pairs)} gold aligned pairs from {gold_file_path}")
+    return gold_pairs
 
-    Returns:
-        Dict[str, float]: Dictionary with metric names as keys and computed metric values as values.
-    """
 
-    if metrics is None:
-        metrics = ["precision@1", "precision@k", "mrr"]
-    num_samples = gold.shape[0]
-    correct_top1 = 0
-    correct_in_topk = 0
-    reciprocal_ranks = []
+def evaluate_alignment(predicted_pairs: List[Tuple[int, int, float]],
+                       source_sentences: List[str],
+                       target_sentences: List[str],
+                       gold_pairs: Set[Tuple[str, str]]) -> Dict[str, float]:
+   
+    gold_pairs = set(gold_pairs)
 
-    for i in range(num_samples):
-        preds = pred_indices[i]
-        gold_idx = gold[i]
-        if preds[0] == gold_idx:
-            correct_top1 += 1
-        if gold_idx in preds:
-            correct_in_topk += 1
-            rank = np.where(preds == gold_idx)[0][0] + 1
-            reciprocal_ranks.append(1.0 / rank)
-        else:
-            reciprocal_ranks.append(0.0)
+    pred_pairs_text = {(source_sentences[i].strip(), target_sentences[j].strip()) for i, j, _ in predicted_pairs}
+    logger.info(f"Predicted pairs count = {len(predicted_pairs)}")
 
-    results = {}
-    if "precision@1" in metrics:
-        results["precision@1"] = correct_top1 / num_samples
-    if "precision@k" in metrics:
-        results[f"precision@{k}"] = correct_in_topk / num_samples
-    if "mrr" in metrics:
-        results["mrr"] = np.mean(reciprocal_ranks)
+    if not gold_pairs:
+        logger.warning("No gold pairs provided. Cannot compute metrics.")
+        return {}
 
-    return results
+    true_positives = pred_pairs_text & gold_pairs
+    num_pred = len(pred_pairs_text)
+    num_gold = len(gold_pairs)
+    num_tp = len(true_positives)
+
+    precision = num_tp / num_pred if num_pred > 0 else 0.0
+    recall = num_tp / num_gold if num_gold > 0 else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall > 0 else 0.0
+
+
+    ref_texts = []
+    hyp_texts = []
+
+    for src, tgt in gold_pairs:
+        for pred_src, pred_tgt in pred_pairs_text:
+            if src == pred_src:
+                ref_texts.append(tgt)
+                hyp_texts.append(pred_tgt)
+                break
+
+    if not hyp_texts:
+        logger.warning("No overlap between gold and predicted sources for text-based metrics.")
+        return {
+            'precision': precision,
+            'recall': recall,
+            'f1': f1,
+            'ter': 1.0,
+            'bleu': 0.0,
+            'chrf': 0.0,
+            'bertscore_precision': 0.0,
+            'bertscore_recall': 0.0,
+            'bertscore_f1': 0.0,
+        }
+
+    ter = sacrebleu.metrics.TER().corpus_score(hyp_texts, [ref_texts]).score / 100
+    bleu = sacrebleu.corpus_bleu(hyp_texts, [ref_texts]).score / 100
+    chrf = sacrebleu.metrics.CHRF().corpus_score(hyp_texts, [ref_texts]).score / 100
+
+    P, R, F1 = bert_score(hyp_texts, ref_texts, lang="en", verbose=False)
+    bert_p = P.mean().item()
+    bert_r = R.mean().item()
+    bert_f1 = F1.mean().item()
+
+    metrics = {
+        'precision': precision,
+        'recall': recall,
+        'f1': f1,
+        'ter': ter,
+        'bleu': bleu,
+        'chrf': chrf,
+        'bertscore_precision': bert_p,
+        'bertscore_recall': bert_r,
+        'bertscore_f1': bert_f1
+    }
+
+    for key, value in metrics.items():
+        logger.info(f"{key.upper()}: {value:.3f}")
+
+    return metrics

@@ -23,6 +23,10 @@ def main():
                         help="Which encoder to use. If not provided, selects automatically based on languages.")
     parser.add_argument("--threshold", "-th", type=float, default=0.7, 
                         help="Cosine similarity threshold for alignment (0 to 1). Default=0.7")
+    parser.add_argument("--topk", "-k", type=int, default=5,
+                        help="Number of nearest neighbors to consider for each source sentence. Default=5")
+    parser.add_argument("--batch-size", "-b", type=int, default=512,
+                        help="Batch size for processing embeddings. Default=512")
     parser.add_argument("--output", "-o", default="aligned_output.txt", help="Output file path for aligned pairs. Default='aligned_output.txt'")
     parser.add_argument("--gold", "-g", help="Path to gold alignment file (for evaluation). Optional.")
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose logging (debug mode).")
@@ -43,12 +47,10 @@ def main():
     tgt_lang = args.tgt_lang
 
     if args.tmx_file:
-        # must provide both
         if not (args.src_lang and args.tgt_lang):
             logger.error("When using --tmx-file you must also specify --src-lang and --tgt-lang")
             sys.exit(1)
     else:
-        # plain-text mode
         if not args.src_file or not args.tgt_file:
             logger.error("Must supply both --src-file and --tgt-file (or use --tmx-file).")
             sys.exit(1)
@@ -61,7 +63,6 @@ def main():
             logger.error(f"Target not found: {tgt_path}")
             sys.exit(1)
 
-        # infer langs if missing
         if not src_lang:
             src_lang = infer_lang(src_path)
         if not tgt_lang:
@@ -78,8 +79,8 @@ def main():
     if args.tmx_file:
         logger.info(f"Reading TMX file {args.tmx_file}")
 
-
     if args.tmx_file:
+        logger.info(f"Parsing TMX: {args.tmx_file}")
         logger.info(f"Parsing TMX: {args.tmx_file}")
         source_sentences, target_sentences = parse_tmx(args.tmx_file, src_lang, tgt_lang)
     else:
@@ -94,7 +95,9 @@ def main():
         aligned_pairs = aligner.align_sentences(source_sentences, target_sentences,
                                                src_lang, tgt_lang,
                                                encoder_name=args.encoder,
-                                               threshold=args.threshold)
+                                               threshold=args.threshold,
+                                               topk=args.topk,
+                                               batch_size=args.batch_size)
     except ImportError as ie:
         logger.error(f"Alignment failed due to missing dependency or model: {ie}")
         exit(1)
@@ -125,6 +128,7 @@ def main():
                 target_sentences,
                 gold_pairs
             )
+
             # extract the numbers
             precision = metrics['precision']
             recall = metrics['recall']
