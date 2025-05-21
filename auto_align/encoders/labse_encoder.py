@@ -1,34 +1,31 @@
-import numpy as np
-from typing import List
-from transformers import AutoTokenizer, AutoModel
-import torch
+import logging
+from typing import List, Optional
+
+from sentence_transformers import SentenceTransformer
+from torch import cuda, backends
+
 from .base_encoder import BaseEncoder
 
+logger = logging.getLogger(__name__)
 
-class LaBSEEncoder(BaseEncoder):
-    """
-    Encoder using the LaBSE model from HuggingFace.
-    """
 
-    def __init__(self):
-        self.device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")  # macOS M1/M2 optimized
-        self.tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/LaBSE")
-        self.model = AutoModel.from_pretrained("sentence-transformers/LaBSE").to(self.device)
-        self.model.eval()
+class LabseEncoder(BaseEncoder):
 
-    def embed_sentences(self, sentences: List[str], lang: str) -> np.ndarray:
-        """
-        Embed a list of sentences into high-dimensional vector representations.
+    def __init__(self, model_name: str = "sentence-transformers/LaBSE", device: Optional[str] = None):
 
-        Args:
-            sentences (List[str]): List of sentences in the same language.
-            lang (str): Language code (not used in LaBSE but required for compatibility).
+        super().__init__()
 
-        Returns:
-            np.ndarray: Embedding matrix of shape (n_sentences, embedding_dim).
-        """
-        inputs = self.tokenizer(sentences, padding=True, truncation=True, return_tensors="pt").to(self.device)
-        with torch.no_grad():
-            outputs = self.model(**inputs)
-            embeddings = outputs.last_hidden_state[:, 0, :]
-        return embeddings.cpu().numpy()
+        if device is None:
+            if backends.mps.is_available():
+                device = "mps"
+            elif cuda.is_available():
+                device = "cuda"
+            else:
+                device = "cpu"
+        logger.info(f"Loading LaBSE model '{model_name}' on {device}")
+        self.model = SentenceTransformer(model_name, device=device)
+
+    def encode(self, sentences: List[str], lang: Optional[str] = None):
+        logger.debug(f"Encoding {len(sentences)} sentences with LaBSE")
+        embeddings = self.model.encode(sentences, convert_to_tensor=True)
+        return embeddings

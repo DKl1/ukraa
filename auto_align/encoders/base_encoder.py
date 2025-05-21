@@ -1,20 +1,17 @@
-import numpy as np
-from typing import List
-from abc import ABC, abstractmethod
+import logging
+from typing import List, Optional
+
+logger = logging.getLogger(__name__)
 
 
-class BaseEncoder(ABC):
-
-    @abstractmethod
-    def embed_sentences(self, sentences: List[str], lang: str) -> np.ndarray:
-        """
-        Abstract method to generate embeddings for a list of sentences for a given language.
-
-        Args:
-            sentences (List[str]): List of sentences.
-            lang (str): Language code.
-
-        Returns:
-            np.ndarray: Array of embeddings.
-        """
+class BaseEncoder:
+ 
+    def __init__(self):
         pass
+
+    def encode(self, sentences: List[str], lang: Optional[str] = None):
+
+        raise NotImplementedError("encode() must be implemented in subclasses")
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}()"
