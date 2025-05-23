@@ -129,30 +129,32 @@ def main():
                 gold_pairs
             )
 
-            # extract the numbers
-            precision = metrics['precision']
-            recall = metrics['recall']
-            f1 = metrics['f1']
-            ter = metrics['ter']
-            bleu = metrics['bleu']
-            chrf = metrics['chrf']
-            bert_p = metrics['bertscore_precision']
-            bert_r = metrics['bertscore_recall']
-            bert_f1 = metrics['bertscore_f1']
+            if not metrics:
+                logger.warning("No metrics were calculated. Gold file might be empty or in wrong format.")
+            else:
+                precision = metrics.get('precision', 0.0)
+                recall = metrics.get('recall', 0.0)
+                f1 = metrics.get('f1', 0.0)
+                ter = metrics.get('ter', 1.0)
+                bleu = metrics.get('bleu', 0.0)
+                chrf = metrics.get('chrf', 0.0)
+                bert_p = metrics.get('bertscore_precision', 0.0)
+                bert_r = metrics.get('bertscore_recall', 0.0)
+                bert_f1 = metrics.get('bertscore_f1', 0.0)
 
-            with open(output_path, 'a', encoding='utf-8') as out:
-                out.write(
-                    f"# "
-                    f"Precision={precision:.3f}, "
-                    f"Recall={recall:.3f}, "
-                    f"F1={f1:.3f}, "
-                    f"TER={ter:.3f}, "
-                    f"BLEU={bleu:.3f}, "
-                    f"CHRF={chrf:.3f}, "
-                    f"BERT-P={bert_p:.3f}, "
-                    f"BERT-R={bert_r:.3f}, "
-                    f"BERT-F1={bert_f1:.3f}\n"
-                )
+                with open(output_path, 'a', encoding='utf-8') as out:
+                    out.write(
+                        f"# "
+                        f"Precision={precision:.3f}, "
+                        f"Recall={recall:.3f}, "
+                        f"F1={f1:.3f}, "
+                        f"TER={ter:.3f}, "
+                        f"BLEU={bleu:.3f}, "
+                        f"CHRF={chrf:.3f}, "
+                        f"BERT-P={bert_p:.3f}, "
+                        f"BERT-R={bert_r:.3f}, "
+                        f"BERT-F1={bert_f1:.3f}\n"
+                    )
 
 if __name__ == "__main__":
     main()
