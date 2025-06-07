@@ -1,7 +1,6 @@
 import logging
 from typing import List, Tuple
 
-import faiss
 import torch
 import torch.nn.functional as F
 
@@ -10,11 +9,12 @@ from auto_align.encoders.encoder_factory import get_encoder
 logger = logging.getLogger(__name__)
 
 
-def align_sentences(source_sentences: List[str], target_sentences: List[str],
-                   src_lang: str, tgt_lang: str, encoder_name: str = None,
-                   threshold: float = 0.7, topk=5, batch_size=512) -> List[Tuple[int, int, float]]:
+def align_sentences_no_faiss(source_sentences: List[str], target_sentences: List[str],
+                           src_lang: str, tgt_lang: str, encoder_name: str = None,
+                           threshold: float = 0.7, topk=5, batch_size=512) -> List[Tuple[int, int, float]]:
     """
-    Align sentences from source and target lists using the specified encoder.
+    Align sentences using direct cosine similarity computation without FAISS.
+    Uses the same interface as the original align_sentences function.
     :param source_sentences: List of sentences in the source language.
     :param target_sentences: List of sentences in the target language.
     :param src_lang: Source language code (for encoders that require it).
@@ -30,7 +30,7 @@ def align_sentences(source_sentences: List[str], target_sentences: List[str],
     logger.info(f"Using encoder: {encoder_name or 'auto-selected'} (src_lang={src_lang}, tgt_lang={tgt_lang})")
 
     encoder = get_encoder(encoder_name, languages=(src_lang, tgt_lang))
-    
+
     src_embeddings = encoder.encode(source_sentences, lang=src_lang)
     tgt_embeddings = encoder.encode(target_sentences, lang=tgt_lang)
 
@@ -38,28 +38,29 @@ def align_sentences(source_sentences: List[str], target_sentences: List[str],
         src_embeddings = torch.tensor(src_embeddings)
     if not isinstance(tgt_embeddings, torch.Tensor):
         tgt_embeddings = torch.tensor(tgt_embeddings)
-        
+    
     device = src_embeddings.device
     tgt_embeddings = tgt_embeddings.to(device)
 
-    src_emb = F.normalize(src_embeddings, dim=1).cpu().numpy().astype('float32')
-    tgt_emb = F.normalize(tgt_embeddings, dim=1).cpu().numpy().astype('float32')
-
-    d = src_emb.shape[1]
-    idx = faiss.IndexFlatIP(d)
-    idx.add(tgt_emb)
+    src_emb = F.normalize(src_embeddings, dim=1)
+    tgt_emb = F.normalize(tgt_embeddings, dim=1)
 
     aligned = []
 
     for i in range(0, len(src_emb), batch_size):
-        block = src_emb[i:i + batch_size]
-        D, I = idx.search(block, topk)
-        for bi, row in enumerate(D):
+        src_batch = src_emb[i:i + batch_size]
+        
+        similarity = torch.mm(src_batch, tgt_emb.t())
+        
+        for bi, scores in enumerate(similarity):
             src_i = i + bi
-            for rank, score in enumerate(row):
+            
+            topk_scores, topk_indices = torch.topk(scores, min(topk, len(scores)))
+            
+            for rank, (score, tgt_j) in enumerate(zip(topk_scores, topk_indices)):
+                score = float(score)
                 if score < threshold:
                     break
-                tgt_j = int(I[bi, rank])
-                aligned.append((src_i, tgt_j, float(score)))
+                aligned.append((src_i, int(tgt_j), score))
 
-    return aligned
+    return aligned 
