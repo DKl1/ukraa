@@ -30,7 +30,7 @@ def align_sentences(source_sentences: List[str], target_sentences: List[str],
     logger.info(f"Using encoder: {encoder_name or 'auto-selected'} (src_lang={src_lang}, tgt_lang={tgt_lang})")
 
     encoder = get_encoder(encoder_name, languages=(src_lang, tgt_lang))
-
+    
     src_embeddings = encoder.encode(source_sentences, lang=src_lang)
     tgt_embeddings = encoder.encode(target_sentences, lang=tgt_lang)
 
@@ -38,6 +38,7 @@ def align_sentences(source_sentences: List[str], target_sentences: List[str],
         src_embeddings = torch.tensor(src_embeddings)
     if not isinstance(tgt_embeddings, torch.Tensor):
         tgt_embeddings = torch.tensor(tgt_embeddings)
+        
     device = src_embeddings.device
     tgt_embeddings = tgt_embeddings.to(device)
 

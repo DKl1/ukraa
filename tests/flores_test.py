@@ -1,6 +1,3 @@
-# tests/flores_test.py
-
-
 import random
 import argparse
 import logging
@@ -74,18 +71,22 @@ def run_flores_eval(src_code: str, tgt_code: str, threshold: float):
         aligned = align_sentences(
             source_sentences=src_sent,
             target_sentences=tgt_shuffled,
-            src_lang=src_code.split("_")[0].lower(),   # e.g. "ukr_Cyrl" -> "ukr"
+            src_lang=src_code.split("_")[0].lower(),  
             tgt_lang=tgt_code.split("_")[0].lower(),   
             threshold=threshold
         )
 
-        # evaluate
-        prec, rec, f1 = evaluate_alignment(
+        metrics = evaluate_alignment(
             predicted_pairs=aligned,
             source_sentences=src_sent,
             target_sentences=tgt_shuffled,
             gold_pairs=gold_pairs
         )
+        
+        prec = metrics.get('precision', 0.0)
+        rec = metrics.get('recall', 0.0)
+        f1 = metrics.get('f1', 0.0)
+        
         logger.info(f"  {split_name}: Precision={prec:.3f}  Recall={rec:.3f}  F1={f1:.3f}")
 
 

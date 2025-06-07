@@ -45,10 +45,10 @@ def main():
     gold_pairs = set(gold_pairs)
 
     metrics = evaluation.evaluate_alignment(
-        aligned,  # predicted_pairs
-        src_sents,  # source_sentences
-        tgt_sents,  # target_sentences
-        gold_pairs  # gold_pairs
+        aligned,  
+        src_sents,  
+        tgt_sents, 
+        gold_pairs 
     )
 
     print("\n=== Evaluation Results ===")

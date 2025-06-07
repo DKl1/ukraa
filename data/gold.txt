@@ -1,0 +1,100 @@
+Привіт, як справи?	Hello, how are you?
+Я почуваюся добре.	I'm fine.
+Дякую.	Thank you.
+Собака.	Dog.
+Погода чудова сьогодні.	The weather is beautiful today.
+Я люблю читати книги.	I love reading books.
+Будь ласка, допоможи мені.	Please, help me.
+Котра година?	What time is it?
+Мені потрібна кава.	I need coffee.
+Давай підемо в парк.	Let's go to the park.
+Чи можу я задати питання?	Can I ask a question?
+Я вивчаю англійську мову.	I am learning English.
+Це чудова ідея.	This is a great idea.
+Як у вас справи?	How are you doing?
+Побачимося пізніше.	See you later.
+Доброго ранку.	Good morning.
+На добраніч.	Good night.
+Я щасливий сьогодні.	I'm happy today.
+Де знаходиться бібліотека?	Where is the library?
+Мені подобається подорожувати.	I like to travel.
+Це дуже цікаво.	This is very interesting.
+Мене звуть Олег.	My name is Oleh.
+Я насолоджуюся музикою.	I enjoy music.
+Давай вечеряти.	Let's have dinner.
+Бажаю гарного дня.	Have a nice day.
+Сьогодні я працюю вдома.	Today I am working from home.
+Вечірній чай - мій улюблений напій.	Evening tea is my favorite drink.
+Моє серце співає від радості.	My heart sings with joy.
+Вулиці міста повні людей.	The city streets are full of people.
+Мій телефон розрядився.	My phone has run out of battery.
+Я планую поїздку наступного літа.	I plan to travel next summer.
+Мені подобається слухати музику.	I enjoy listening to music.
+Чи можемо ми зустрітися завтра?	Can we meet tomorrow?
+Вчора був чудовий день.	Yesterday was a wonderful day.
+Будь ласка, залиште повідомлення.	Please, leave a message.
+Моя сім'я дуже важлива для мене.	My family is very important to me.
+Сьогодні сонячно і тепло.	It is sunny and warm today.
+Я обожнюю подорожі.	I adore traveling.
+Можеш передати сіль, будь ласка?	Could you pass the salt, please?
+Мій улюблений колір - синій.	My favorite color is blue.
+Я пишаюся своїми досягненнями.	I am proud of my achievements.
+Будь ласка, відчиніть вікно.	Please, open the window.
+Ми плануємо святкування цього вечора.	We are planning a celebration tonight.
+Моя кімната дуже затишна.	My room is very cozy.
+Мені подобається читати вільний час.	I like reading in my free time.
+Чи є у вас вільний час?	Do you have some free time?
+Я хочу навчитись грати на гітарі.	I want to learn to play the guitar.
+Сьогодні я випив чудову каву.	Today I had a wonderful cup of coffee.
+Моє життя змінюється на краще.	My life is getting better.
+Я дуже ціную дружбу.	I truly value friendship.
+Будь ласка, запишіть це.	Please, write this down.
+Моя робота приносить мені задоволення.	My work gives me great satisfaction.
+Вулиці нашого міста прекрасні.	The streets of our city are beautiful.
+Я люблю готувати смачні страви.	I love cooking delicious meals.
+Чи можна це повторити?	Can you repeat that, please?
+Мій день був дуже насиченим.	My day was very busy.
+Я насолоджуюся кожною миттю.	I enjoy every moment.
+Будьте ласкаві, допоможіть мені.	Please, kindly help me.
+У мене є кілька ідей.	I have several ideas.
+Мені потрібно більше інформації.	I need more information.
+Сьогодні відбувся важливий захід.	A significant event took place today.
+Моє серце сповнене натхнення.	My heart is full of inspiration.
+Дякую за вашу підтримку.	Thank you for your support.
+Я радий вас бачити.	I am glad to see you.
+Чи можемо ми обговорити це пізніше?	Can we discuss this later?
+Мій комп'ютер працює дуже швидко.	My computer works very fast.
+Я відпочиваю після важкого дня.	I am relaxing after a hard day.
+Це було неймовірно.	That was incredible.
+Будь ласка, передайте подяку.	Please, pass on my thanks.
+Мій настрій сьогодні чудовий.	My mood is excellent today.
+Я вчуся кожного дня.	I study every day.
+У нас є чудова команда.	We have a wonderful team.
+Мені подобається це місто.	I like this city.
+Сьогодні дуже важливий день.	Today is a very important day.
+Чи подобається вам ця музика?	Do you like this music?
+Я завжди готовий до змін.	I am always ready for change.
+Мої друзі мене надихають.	My friends inspire me.
+Це неймовірно цікава історія.	This is an incredibly interesting story.
+Я пишаюся своїм корінням.	I am proud of my heritage.
+Мені сподобалась ця подія.	I enjoyed this event.
+Дякую за гарний вечір.	Thank you for a lovely evening.
+Мій кавун дуже смачний.	My watermelon is very tasty.
+У мене є нова ідея.	I have a new idea.
+Будь ласка, слухайте уважно.	Please, listen carefully.
+Я люблю цей аромат.	I love this fragrance.
+Сьогодні я відчуваю себе чудово.	Today I feel fantastic.
+Моє серце сповнене любові.	My heart is full of love.
+Ми збираємось у вихідні.	We are gathering this weekend.
+Я купив новий автомобіль.	I bought a new car.
+Будь ласка, дайте мені знати.	Please, let me know.
+Мій будинок знаходиться на пагорбі.	My house is on a hill.
+Я мрію про подорожі.	I dream about traveling.
+Це місце дуже гарне.	This place is very beautiful.
+Я обожнюю спокійні вечори.	I adore quiet evenings.
+Чи є в вас якісь питання?	Do you have any questions?
+Мені подобається ця книга.	I like this book.
+Я завжди в пошуках пригод.	I am always in search of adventures.
+Моя родина завжди поруч.	My family is always by my side.
+Це був незабутній день.	That was an unforgettable day.
+Я вдячний за кожну мить.	I am grateful for every moment.

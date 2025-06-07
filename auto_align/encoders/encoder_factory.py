@@ -50,5 +50,5 @@ def get_encoder(encoder_name: Optional[str] = None, languages: Optional[Tuple[st
         raise ValueError(f"Unknown encoder name '{encoder_name}'")
 
     _encoder_cache[key] = encoder_instance
-    # logger.info(f"Encoder '{key}' initialized and cached.")
+    logger.info(f"Encoder '{key}' initialized and cached.")
     return encoder_instance
