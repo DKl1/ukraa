@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <header creationtool="auto-align" segtype="sentence" adminlang="en-us" srclang="en"/>
+  <body>
+    <tu>
+      <tuv xml:lang="en"><seg>Hello world</seg></tuv>
+      <tuv xml:lang="uk"><seg>Привіт світ</seg></tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en"><seg>Goodbye</seg></tuv>
+      <tuv xml:lang="uk"><seg>До побачення</seg></tuv>
+    </tu>
+  </body>
+</tmx>

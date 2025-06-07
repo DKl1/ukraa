@@ -58,11 +58,9 @@ coverage.xml
 aligned_output.txt
 aligned_en_uk.txt
 flores200_results.txt
-data
 DEMO.py
 ukraa.egg-info/
 data/temp/
-data_en_es/
 .vector_cache/
 
 # Model files and large data (if needed)
