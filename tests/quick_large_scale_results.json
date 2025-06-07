@@ -1,0 +1,242 @@
+{
+  "Ukrainian-English": {
+    "5000": {
+      "processing_time": 35.45012092590332,
+      "sentences_per_second": 141.0432424321157,
+      "num_alignments": 24348,
+      "alignment_rate": 4.8696,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 32.728891134262085,
+      "sentences_per_second": 305.54044617575045,
+      "num_alignments": 49545,
+      "alignment_rate": 4.9545,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 50.00813603401184,
+      "sentences_per_second": 299.95119173804255,
+      "num_alignments": 74611,
+      "alignment_rate": 4.974066666666666,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 69.64195036888123,
+      "sentences_per_second": 287.18322640396343,
+      "num_alignments": 99747,
+      "alignment_rate": 4.98735,
+      "success": true
+    }
+  },
+  "Ukrainian-German": {
+    "5000": {
+      "processing_time": 15.207630157470703,
+      "sentences_per_second": 328.7823249399424,
+      "num_alignments": 24809,
+      "alignment_rate": 4.9618,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 30.590984344482422,
+      "sentences_per_second": 326.89369807100246,
+      "num_alignments": 49846,
+      "alignment_rate": 4.9846,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 46.18549680709839,
+      "sentences_per_second": 324.7772793838304,
+      "num_alignments": 74844,
+      "alignment_rate": 4.9896,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 61.67615103721619,
+      "sentences_per_second": 324.2744507181024,
+      "num_alignments": 99888,
+      "alignment_rate": 4.9944,
+      "success": true
+    }
+  },
+  "Ukrainian-French": {
+    "5000": {
+      "processing_time": 15.99296522140503,
+      "sentences_per_second": 312.6374584562959,
+      "num_alignments": 25000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 31.71221613883972,
+      "sentences_per_second": 315.33589315293676,
+      "num_alignments": 49999,
+      "alignment_rate": 4.9999,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 48.59103298187256,
+      "sentences_per_second": 308.69893228233946,
+      "num_alignments": 75000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 65.71281695365906,
+      "sentences_per_second": 304.35462862753366,
+      "num_alignments": 100000,
+      "alignment_rate": 5.0,
+      "success": true
+    }
+  },
+  "Ukrainian-Polish": {
+    "5000": {
+      "processing_time": 16.32451891899109,
+      "sentences_per_second": 306.28773961499485,
+      "num_alignments": 25000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 31.72942304611206,
+      "sentences_per_second": 315.16488608907565,
+      "num_alignments": 50000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 49.04773569107056,
+      "sentences_per_second": 305.8245154165362,
+      "num_alignments": 75000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 65.01136898994446,
+      "sentences_per_second": 307.6384993999045,
+      "num_alignments": 99996,
+      "alignment_rate": 4.9998,
+      "success": true
+    }
+  },
+  "English-Ukrainian": {
+    "5000": {
+      "processing_time": 14.807674169540405,
+      "sentences_per_second": 337.6627512702211,
+      "num_alignments": 24436,
+      "alignment_rate": 4.8872,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 30.371635913848877,
+      "sentences_per_second": 329.25457253490237,
+      "num_alignments": 49597,
+      "alignment_rate": 4.9597,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 46.38938593864441,
+      "sentences_per_second": 323.34982876986817,
+      "num_alignments": 74751,
+      "alignment_rate": 4.9834,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 61.95045614242554,
+      "sentences_per_second": 322.83862372247165,
+      "num_alignments": 99826,
+      "alignment_rate": 4.9913,
+      "success": true
+    }
+  },
+  "German-Ukrainian": {
+    "5000": {
+      "processing_time": 15.6996169090271,
+      "sentences_per_second": 318.47910869245845,
+      "num_alignments": 24868,
+      "alignment_rate": 4.9736,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 31.73287010192871,
+      "sentences_per_second": 315.1306505802702,
+      "num_alignments": 49915,
+      "alignment_rate": 4.9915,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 48.582990884780884,
+      "sentences_per_second": 308.75003219900367,
+      "num_alignments": 74961,
+      "alignment_rate": 4.9974,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 63.963168144226074,
+      "sentences_per_second": 312.6799466046366,
+      "num_alignments": 99967,
+      "alignment_rate": 4.99835,
+      "success": true
+    }
+  },
+  "French-Ukrainian": {
+    "5000": {
+      "processing_time": 16.34355401992798,
+      "sentences_per_second": 305.9310107155037,
+      "num_alignments": 25000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 33.10363793373108,
+      "sentences_per_second": 302.08160263287743,
+      "num_alignments": 50000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 50.13658857345581,
+      "sentences_per_second": 299.18270123271935,
+      "num_alignments": 75000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 66.15848088264465,
+      "sentences_per_second": 302.30440199310254,
+      "num_alignments": 100000,
+      "alignment_rate": 5.0,
+      "success": true
+    }
+  },
+  "Polish-Ukrainian": {
+    "5000": {
+      "processing_time": 16.704541206359863,
+      "sentences_per_second": 299.319804012119,
+      "num_alignments": 25000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "10000": {
+      "processing_time": 33.16041803359985,
+      "sentences_per_second": 301.5643527131498,
+      "num_alignments": 50000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "15000": {
+      "processing_time": 49.93160533905029,
+      "sentences_per_second": 300.41093007416015,
+      "num_alignments": 75000,
+      "alignment_rate": 5.0,
+      "success": true
+    },
+    "20000": {
+      "processing_time": 66.25747990608215,
+      "sentences_per_second": 301.85271200095985,
+      "num_alignments": 100000,
+      "alignment_rate": 5.0,
+      "success": true
+    }
+  }
+}

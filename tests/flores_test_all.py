@@ -1,5 +1,3 @@
-# tests/flores_test_all.py
-
 import argparse
 import logging
 import random
@@ -53,6 +51,10 @@ FLORES_CODE = {
     "id": "ind_Latn",
     "ta": "tam_Taml",
     "bn": "ben_Beng",
+    "af": "afr_Latn",
+    "ru": "rus_Cyrl",
+    "ko": "kor_Hang",
+    "th": "tha_Thai",
 }
 
 def extract_parallel(split, src_code: str, tgt_code: str):
@@ -138,10 +140,19 @@ def main():
         if b in seen:
             continue
         seen.add(b)
+        
+        if b not in FLORES_CODE:
+            logger.warning(f"Skipping language '{b}' - not found in FLORES_CODE dictionary")
+            continue
+            
         src_f = FLORES_CODE["uk"]
         tgt_f = FLORES_CODE[b]
         logger.info(f"\n===== Testing pair: uk -> {b} ({model}) =====")
-        run_one_pair(src_f, tgt_f, args.threshold)
+        try:
+            run_one_pair(src_f, tgt_f, args.threshold)
+        except Exception as e:
+            logger.error(f"Error testing pair uk -> {b}: {e}")
+            continue
 
 if __name__=="__main__":
     main()
